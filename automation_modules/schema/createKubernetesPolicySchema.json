@@ -1,0 +1,18 @@
+{
+  "name": "",
+  "policy_type": "",
+  "never_deny": false,
+  "security_rules": [
+    {
+      "effect": "permit",
+      "action": "all_ops",
+      "partial_match": false,
+      "resource_set_id": "TestResourceSet",
+      "exclude_resource_set": true
+    }
+  ]
+}
+  "grant_type": "password",
+  "username": "from_vars_cm_username",
+  "password": "from_vars_cm_password"
+}
