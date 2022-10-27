@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "policy_type": "",
+  "name": "from_vars_cte_policy_name",
+  "policy_type": "csi",
   "never_deny": false,
   "security_rules": [
     {
