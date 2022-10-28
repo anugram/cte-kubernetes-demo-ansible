@@ -1,0 +1,7 @@
+{
+  "name": "from_vars_cte_sg_name",
+  "k8s_namespace": "from_vars_k8s_namespace",
+  "k8s_storage_class": "from_vars_k8s_sc",
+  "description": "",
+  "client_profile": "automatic"
+}

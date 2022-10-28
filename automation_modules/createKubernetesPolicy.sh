@@ -20,9 +20,8 @@ function createKubernetesPolicy() {
     #payload=`jq -r --arg policyName "$cm_kubernetes_policy_name" --arg key "${key_policy_json_array}" '.name = $policyName | .key_rules = $key' <<< "$schema"`
     payload=`jq -r --arg policyName "$cm_kubernetes_policy_name" '.name = $policyName' <<< "$schema"`
     __URL="https://${cm_host}/api/v1/transparent-encryption/policies/"
-    echo ${payload}
-    response=`curl -k ${__URL} -H "${header1}" -H "${header2}" -H "${header3}" --data-binary "${payload}" --compressed`
-
+    response=`curl -s -k ${__URL} -H "${header1}" -H "${header2}" -H "${header3}" --data-binary "${payload}" --compressed`
+    rm -f /automation_modules/schema/temp.json 
     policyName=`echo ${response} | jq -r '.name'`
     echo ${policyName};
 }

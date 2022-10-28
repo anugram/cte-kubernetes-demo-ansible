@@ -1,7 +1,10 @@
 {
   "cm_username":"admin",
-  "cm_password":"ChangeIt!",
-  "cm_host":"1.1.1.1",
+  "cm_password":"KeySecure01!",
+  "cm_host":"20.102.80.224",
   "cm_kubernetes_policy_name":"dummy01",
-  "cm_kubernetes_policy_key_name":"dummyKey04"
+  "cm_kubernetes_policy_key_name":"dummyKey04",
+  "cm_kubernetes_storage_group_name":"dummysg01",
+  "cm_kubernetes_storage_class":"dummysc",
+  "cm_kubernetes_namespace":"default"
 }
