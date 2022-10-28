@@ -9,7 +9,7 @@ spec:
   accessModes:
   - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: cte-aj-sc
+  storageClassName: CM_STORAGE_CLASS
   local:
     path: /tmp/data
   nodeAffinity:

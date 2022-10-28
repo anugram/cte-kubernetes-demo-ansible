@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: local-test-claim
 spec:
-  storageClassName: cte-aj-sc
+  storageClassName: CM_STORAGE_CLASS
   accessModes:
     - ReadWriteMany
   resources:
