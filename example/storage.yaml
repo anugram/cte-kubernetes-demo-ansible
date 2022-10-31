@@ -1,18 +1,18 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: CM_STORAGE_CLASS
-  namespace: VAR_NS
+  name: cte-csi-sc02
+  namespace: cte
 provisioner: csi.cte.cpl.thalesgroup.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 allowVolumeExpansion: true
 parameters:
   # Domain name or IP address of the CiperTrust Manager (Required)
-  key_manager_addr: CM_IP
+  key_manager_addr: 20.102.80.224
 
   # Name of the CipherTrust Manager K8s Storage Group. (Required)
-  k8_storage_group: CM_STORAGE_GROUP
+  k8_storage_group: cte-csi-sg02
 
   # Kubernetes Secret with CM registration token (Required)
   registration_token_secret: cte-demo-token

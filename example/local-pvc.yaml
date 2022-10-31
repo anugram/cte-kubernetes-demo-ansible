@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: local-test-claim
-  namespace: VAR_NS
+  namespace: cte
 spec:
   storageClassName: local
   accessModes:

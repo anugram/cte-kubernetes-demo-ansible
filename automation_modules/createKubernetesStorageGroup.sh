@@ -14,7 +14,7 @@ function createKubernetesStorageGroup() {
     namespace=`cat ./automation_modules/vars/main.json | jq -r '.cm_kubernetes_namespace'`
     
     schema=`cat ./automation_modules/schema/createKubernetesStorageGroupSchema.json | jq -r '.'`
-    payload=`jq -c --arg k8s_sg_name "$cm_kubernetes_storage_group_name" --arg k8s_sc_name "$sc_name" --arg k8s_namespace "$namespace" --arg profile "DefaultClientProfile" '.name = $k8s_sg_name | .k8s_storage_class = $k8s_sg_name | .k8s_namespace = $k8s_namespace | .client_profile = $profile' <<< "$schema"`
+    payload=`jq -c --arg k8s_sg_name "$cm_kubernetes_storage_group_name" --arg k8s_sc_name "$sc_name" --arg k8s_namespace "$namespace" --arg profile "DefaultClientProfile" '.name = $k8s_sg_name | .k8s_storage_class = $k8s_sc_name | .k8s_namespace = $k8s_namespace | .client_profile = $profile' <<< "$schema"`
     __URL="https://${cm_host}/api/v1/transparent-encryption/csigroups/"
     
     response=`curl -k ${__URL} -H "${header1}" -H "${header2}" -H "${header3}" --data-binary "${payload}" --compressed`

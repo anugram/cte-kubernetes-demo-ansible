@@ -5,7 +5,7 @@
       "restrict_update": false
   },
   "key_rules": [{
-      "key_id": "dummyKey04"
+      "key_id": "cte-csi-key02"
   }],
   "never_deny": false,
   "security_rules": [

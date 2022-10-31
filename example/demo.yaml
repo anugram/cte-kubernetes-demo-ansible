@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
     name: cte-csi-demo
-    namespace: VAR_NS
+    namespace: cte
 spec:
   volumes:
     - name: test-vol
