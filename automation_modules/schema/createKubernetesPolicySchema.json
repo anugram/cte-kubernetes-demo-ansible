@@ -18,6 +18,16 @@
       "exclude_process_set": false,
       "action": "all_ops",
       "effect": "permit,audit,applykey"
+    },
+    {
+      "process_set_id": "",
+      "resource_set_id": "RESOURCE_SET_ID",
+      "user_set_id": "",
+      "exclude_user_set": false,
+      "exclude_resource_set": false,
+      "exclude_process_set": false,
+      "action": "all_ops",
+      "effect": "permit,audit,applykey"
     }
   ]
 }

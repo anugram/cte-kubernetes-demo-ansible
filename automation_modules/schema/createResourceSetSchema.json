@@ -1,0 +1,10 @@
+{
+  "name": "tmp-data",
+  "description": "",
+  "type": "Directory",
+  "resources": [{
+    "directory": "/tmp/data",
+    "file": "*",
+    "include_subfolders": true
+  }]
+}

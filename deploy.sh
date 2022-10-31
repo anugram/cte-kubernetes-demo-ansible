@@ -15,15 +15,15 @@ nsName=`cat ./automation_modules/vars/main.json | jq -r '.cm_kubernetes_namespac
 regToken=`cat ./automation_modules/vars/main.json | jq -r '.cm_reg_token'`
 cmIP=`cat ./automation_modules/vars/main.json | jq -r '.cm_host'`
 
-#token=`getToken`
-#user=`getUser`
-#keyName=`createKubernetesPolicyKey`
-#policy=`createKubernetesPolicy`
-#echo "**********Policy Created on Ciphertrust Manager**********"
-#echo "CTE for K8s Policy Name: ${policy}"
-#sgId=`createKubernetesStorageGroup`
-#echo "**********Security Group Created on Ciphertrust Manager**********"
-#echo "CTE for K8s Group Id: ${sgId}"
+token=`getToken`
+user=`getUser`
+keyName=`createKubernetesPolicyKey`
+policy=`createKubernetesPolicy`
+echo "**********Policy Created on Ciphertrust Manager**********"
+echo "CTE for K8s Policy Name: ${policy}"
+sgId=`createKubernetesStorageGroup`
+echo "**********Security Group Created on Ciphertrust Manager**********"
+echo "CTE for K8s Group Id: ${sgId}"
 
 regTokenEnc=`echo ${regToken} | base64 -w 0`
 cp -rf ./templates/*.* ./example/
@@ -44,7 +44,7 @@ sed -i "s/VAR_NS/$nsName/g" ./example/createNamespace.yaml
 sed -i "s/VAR_NS/$nsName/g" ./example/demo.yaml
 sed -i "s/VAR_NS/$nsName/g" ./example/createStorageClass.yaml
 
-#git clone https://github.com/thalescpl-io/ciphertrust-transparent-encryption-kubernetes.git
+git clone https://github.com/thalescpl-io/ciphertrust-transparent-encryption-kubernetes.git
 vagrant up
 vagrant ssh -c 'sudo apt-get install -y nfs-common'
 vagrant ssh -c 'sudo systemctl start nfs-utils'
