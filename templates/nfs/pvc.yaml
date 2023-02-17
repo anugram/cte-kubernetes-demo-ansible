@@ -6,7 +6,7 @@ metadata:
   namespace: VAR_NS
   annotations:
      csi.cte.cpl.thalesgroup.com/policy: CM_CTE_POLICY
-     csi.cte.cpl.thalesgroup.com/source_pvc: local-test-claim
+     csi.cte.cpl.thalesgroup.com/source_pvc: nfs-claim
 spec:
   storageClassName: CM_STORAGE_CLASS
   accessModes:

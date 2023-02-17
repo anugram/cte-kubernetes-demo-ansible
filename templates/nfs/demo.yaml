@@ -12,7 +12,7 @@ spec:
   - name: ubuntu
     image: ubuntu
     volumeMounts:
-      - mountPath: "/tmp/data"
+      - mountPath: "/data/cte/"
         name: test-vol
     command:
      - "sleep"

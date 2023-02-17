@@ -8,4 +8,3 @@ data:
   # This is a base64 encoded registration token.  To generate:
   # echo <CM REGISTRATION TOKEN STRING> | base64 -w 0
   registration_token: CM_TOKEN_ENC
-
