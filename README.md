@@ -22,7 +22,7 @@ git clone https://github.com/anugram/cte-kubernetes-demo-ansible.git
 ```
 
 #### 3) Deploy required softwares on target machines
-Install NFS Server
+* Install NFS Server
 ```
 - hosts: nfs-servers
   become: yes
@@ -41,10 +41,11 @@ Execute Playbook
 ```
 ansible-playbook nfs-playbook.yml -e "ansible_become_password=<root_password>"
 ```
-Install Docker
-Install Minikube
-Install PowerShell
+* Install Docker
+* Install Minikube
+* Install PowerShell
 ```
+# Applicable for a target machine with snap based Ubuntu distribution
 - hosts: minikube-servers
   become: yes
   tasks:
