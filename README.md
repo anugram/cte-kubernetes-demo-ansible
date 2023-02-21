@@ -73,26 +73,15 @@ Execute Playbook
 ```
 ansible-playbook minikube-playbook.yml -e "ansible_become_password=<root_password>"
 ```
-#### 3) Configure variables
+#### 3) Update config.txt file
 Variable Name | Description | Example Value
 --- | --- | ---
-cm_username | Username for Ciphertrust Manager | admin
-cm_password | Password for Ciphertrust Manager | *********
-cm_host | FQDN/Host/IP of Ciphertrust Manager | 10.10.10.10
-cm_kubernetes_policy_name | Policy for Kubernetes Container Storage Interface | cte-csi-policy
-cm_kubernetes_policy_key_name | Key associated with Policy | clear_key
-cm_kubernetes_storage_group_name | Kubernetes Storage Group Name | cte-csi-sg
-cm_kubernetes_storage_class | Kubernetes Storage Class | cte-csi-sc
-cm_kubernetes_namespace | Kubernetes Namespace | default
-cm_reg_token | Ciphertrust Manager Registration Token | <Base64 Encoded Registration token from CM>
+username | Username for Ciphertrust Manager | admin
+password | Password for Ciphertrust Manager | *********
+cmip | FQDN/Host/IP of Ciphertrust Manager | 10.10.10.10
+counter | Unique value to be appended to CM config parameters | demo
+nfsServerIp | IP Address of an NFS server | 10.10.10.10
 #### 4) Deploying Solution
 ```
-./deploy.sh
-```
-#### 5) Accessing the setup
-```
-vagrant ssh
-```
-```
-kubectl exec -it cte-csi-demo /bin/bash
+ansible-playbook cte-deployment.yml  -e "ansible_become_password=<root_password>"
 ```
