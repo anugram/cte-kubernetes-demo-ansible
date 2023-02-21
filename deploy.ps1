@@ -171,8 +171,13 @@ $body = @{
     )
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
-$rootRSId = $response.id
+$rootRSId = '';
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+	$rootRSId=$response.id 
+} catch {
+    Write-Output "just proceeding anyways...."
+}
  
 #Create Resource Set
 Write-Output "Creating Resource Set data..."
@@ -200,8 +205,13 @@ $body = @{
     )
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
-$dataRSId = $response.id
+$dataRSId=''
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+	$dataRSId=$response.id
+} catch {
+    Write-Output "just proceeding anyways...."
+}
  
 #Create CSI Policy
 Write-Output "Creating Container Storage Interface Policy..."
@@ -242,8 +252,15 @@ $body = @{
   )
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
-$policyId = $response.id
+$policyId = ''
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+	$policyId=$response.id
+}
+catch {
+	Write-Output "just proceeding anyways...."
+}
+
  
 #Create Kubernetes Storage Group
 Write-Output "Creating Kubernetes Storage Group..."
@@ -256,8 +273,14 @@ $body = @{
   'client_profile' = "DefaultClientProfile"
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
-$sgId = $response.id
+$sgId=''
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+	$sgId = $response.id
+}
+catch {
+	Write-Output "just proceeding anyways...."
+}
  
 #Create Kubernetes Storage Group GuardPoints
 Write-Output "Creating Kubernetes Storage Group GuardPoints..."
@@ -266,7 +289,12 @@ $body = @{
   'policy_list' = @($policyId)
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+}
+catch {
+	Write-Output "just proceeding anyways...."
+}
  
 #Create Registration Token
 Write-Output "Creating Registration Token..."
@@ -279,8 +307,15 @@ $body = @{
   'max_clients' = 5
 }
 $jsonBody = $body | ConvertTo-Json -Depth 5
-$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
-$regToken = $response.token
+$regToken=''
+try {
+	$response = Invoke-RestMethod -SkipCertificateCheck -Method 'Post' -Uri $url -Body $jsonBody -Headers $headers -ContentType 'application/json'
+	$regToken = $response.token
+}
+catch {
+	Write-Output "just proceeding anyways...."
+}
+
 $Bytes = [System.Text.Encoding]::Unicode.GetBytes($regToken)
 $regTokenEnc =[Convert]::ToBase64String($Bytes)
  
@@ -303,10 +338,10 @@ sed -i "s/VAR_NS/cte/g" ./example/demo.yaml
 #cd ./ciphertrust-transparent-encryption-kubernetes && ./deploy.sh
 #cd ..
 #kubectl taint nodes --all node-role.kubernetes.io/control-plane-
-kubectl apply -f ./example/createNamespace.yaml
-kubectl apply -f ./example/cmtoken.yaml
-kubectl apply -f ./example/storage.yaml
-kubectl apply -f ./example/local-pv.yaml
-kubectl apply -f ./example/local-pvc.yaml
-kubectl apply -f ./example/pvc.yaml
-kubectl apply -f ./example/demo.yaml
+minikube kubectl apply -f ./example/createNamespace.yaml
+minikube kubectl apply -f ./example/cmtoken.yaml
+minikube kubectl apply -f ./example/storage.yaml
+minikube kubectl apply -f ./example/local-pv.yaml
+minikube kubectl apply -f ./example/local-pvc.yaml
+minikube kubectl apply -f ./example/pvc.yaml
+minikube kubectl apply -f ./example/demo.yaml
