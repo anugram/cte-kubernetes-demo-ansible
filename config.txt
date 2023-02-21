@@ -1,0 +1,8 @@
+[CMCredentials]
+username=<ADMIN_USERNAME>
+password=<ADMIN_PWD>
+cmip=<CM_IP>
+
+[Other]
+counter=demo-ansible-001
+nfsServerIp=<NFS_SERVER_IP>

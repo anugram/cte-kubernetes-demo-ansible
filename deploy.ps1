@@ -1,9 +1,12 @@
-$username = "<CM_USERNAME>"
-$password = "<CM_PWD>"
-$kms = "<CM_IP>"
-$counter = "001"
-$nfsServerIp = "<NFS_SERVER_IP>"
- 
+# Read the variables from the config file (config.txt)
+Get-Content ".\config.txt" | foreach-object -begin {$h=@{}} -process { $k = [regex]::split($_,'='); if(($k[0].CompareTo("") -ne 0) -and ($k[0].StartsWith("[") -ne $True)) { $h.Add($k[0], $k[1]) } }
+
+$username = $h.Get_Item("username")
+$password = $h.Get_Item("password")
+$kms = $h.Get_Item("cmip")
+$counter = $h.Get_Item("counter")
+$nfsServerIp = $h.Get_Item("nfsServerIp")
+
 #Param($cleanup)
 $cleanup = 'y'
 #Invoke API for token generation
