@@ -1,0 +1,43 @@
+---
+ - hosts: minikube-servers
+   become: yes
+   tasks:
+      - name: Clone a github repository
+        git:
+          repo: https://github.com/anugram/cte-kubernetes-demo-ansible.git
+          dest: /tmp/cte/
+          clone: yes
+          force: yes
+          update: yes
+
+      - name: run Dos2Unix
+        ansible.builtin.shell:
+          "find . -type f -print0 | xargs -0 dos2unix"
+        args:
+          chdir: "/tmp/cte"
+
+      - name: copy config file to remote
+        ansible.builtin.copy:
+          src: ./automation_modules/vars/main.json
+          dest: /tmp/cte/automation_modules/vars/main.json
+          mode: u+rw,g-wx,o-rwx      
+
+      - name: Clone CTE github repository
+        git:
+          repo: https://github.com/thalescpl-io/ciphertrust-transparent-encryption-kubernetes.git
+          dest: /tmp/cte-k8s/
+          clone: yes
+          force: yes
+          update: yes
+
+      - name: deploye CTE for k8s
+        ansible.builtin.shell:
+          "./deploy.sh"
+        args:
+          chdir: "/tmp/cte-k8s"
+
+      - name: deploye CTE
+        ansible.builtin.shell:
+          "./deploy.sh"
+        args:
+          chdir: "/tmp/cte"

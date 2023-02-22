@@ -1,0 +1,58 @@
+---
+ - hosts: minikube-servers
+   become: yes
+   roles:
+     - gantsign.minikube
+     - geerlingguy.docker
+
+   tasks:
+      - name: add user to docker group
+        ansible.builtin.shell:
+          "usermod -aG docker $USER"
+        become: yes
+
+      - name: install kubectl
+        snap:
+          name: kubectl
+          classic: yes
+
+      - name: install powershell
+        snap:
+          name: powershell
+          classic: yes
+
+      - name: install JQ
+        snap:
+          name: jq
+
+      - name: install helm
+        snap:
+          name: helm
+          classic: yes
+
+      - name: Install cri-docker
+        apt:
+          deb: https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.1/cri-dockerd_0.3.1.3-0.ubuntu-jammy_amd64.deb
+
+      - name: Install dos2unix
+        ansible.builtin.apt:
+          pkg:
+          - dos2unix
+          - conntrack
+
+      - name: delete existing minikube
+        ansible.builtin.shell:
+          "minikube delete --all"
+
+      - name: for docker based Minikube inside VM
+        ansible.builtin.shell:
+          "sysctl fs.protected_regular=0"
+        become: yes
+
+      - name: start minikube
+        ansible.builtin.shell:
+          "minikube start --driver=docker --force"
+
+      - name: start kubectl
+        ansible.builtin.shell:
+          "kubectl get ns"

@@ -1,0 +1,7 @@
+- hosts: nfs-servers
+  become: yes
+  roles:
+    - role: anuragjain_ca.nfs
+      nfs_exports:
+        - '/data/cte  *(rw,sync,no_subtree_check,no_root_squash,insecure)'
+        - '/data  *(rw,sync,no_subtree_check,no_root_squash,insecure)'
