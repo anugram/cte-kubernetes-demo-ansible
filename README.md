@@ -54,11 +54,6 @@ ansible-playbook nfs-playbook.yml -e "ansible_become_password=<root_password>"
       name:
         - docker
 
-  - name: install minikube
-    community.general.snap:
-      name:
-        - minikube
-
   - name: install powershell
     community.general.snap:
       name: powershell
@@ -71,7 +66,7 @@ xxx.xxx.xxx.xxx     ansible_user=<username>
 ```
 Execute Playbook
 ```
-ansible-playbook minikube-playbook.yml -e "ansible_become_password=<root_password>"
+ansible-playbook docker-playbook.yml -e "ansible_become_password=<root_password>"
 ```
 #### 3) Update config.txt file
 Variable Name | Description | Example Value
