@@ -1,9 +1,17 @@
 {
-  "name": "tmp-data",
+  "name": "data",
   "description": "",
   "type": "Directory",
   "resources": [{
-    "directory": "/tmp/data",
+    "directory": "/",
+    "file": "*",
+    "include_subfolders": true
+  },{
+    "directory": "/data",
+    "file": "*",
+    "include_subfolders": true
+  },{
+    "directory": "/data/cte",
     "file": "*",
     "include_subfolders": true
   }]

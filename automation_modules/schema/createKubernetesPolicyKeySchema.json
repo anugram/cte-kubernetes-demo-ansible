@@ -7,20 +7,20 @@
   "meta": {
     "ownerId": "auto_fill",
     "permissions": {
-	"DecryptWithKey": ["CTE Clients"],
-	"EncryptWithKey": ["CTE Clients"],
-	"ExportKey": ["CTE Clients"],
-	"MACVerifyWithKey": ["CTE Clients"],
-	"MACWithKey": ["CTE Clients"],
-	"ReadKey": ["CTE Clients"],
-	"SignVerifyWithKey": ["CTE Clients"],
-	"SignWithKey": ["CTE Clients"],
-	"UseKey": ["CTE Clients"]
+      "DecryptWithKey": ["CTE Clients"],
+      "EncryptWithKey": ["CTE Clients"],
+      "ExportKey": ["CTE Clients"],
+      "MACVerifyWithKey": ["CTE Clients"],
+      "MACWithKey": ["CTE Clients"],
+      "ReadKey": ["CTE Clients"],
+      "SignVerifyWithKey": ["CTE Clients"],
+      "SignWithKey": ["CTE Clients"],
+      "UseKey": ["CTE Clients"]
     },
     "cte": {
-	"persistent_on_client": true,
-	"encryption_mode": "CBC_CS1",
-	"cte_versioned": false
+      "persistent_on_client": true,
+      "encryption_mode": "CBC_CS1",
+      "cte_versioned": false
     }
   },
   "xts": true

@@ -1,0 +1,7 @@
+{
+  "name_prefix": "cte-token-$counter",
+  "lifetime": "",
+  "cert_duration": 730,
+  "ca_id": "automatic",
+  "max_clients": 5
+}
