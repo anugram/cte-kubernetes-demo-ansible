@@ -24,59 +24,44 @@ git clone https://github.com/anugram/cte-kubernetes-demo-ansible.git
 #### 3) Deploy required softwares on target machines
 * Install NFS Server
 ```
-- hosts: nfs-servers
-  become: yes
-  roles:
-    - role: anuragjain_ca.nfs
-      nfs_exports:
-        - '/data/cte  *(rw,sync,no_subtree_check,no_root_squash,insecure)'
-        - '/data  *(rw,sync,no_subtree_check,no_root_squash,insecure)'
+ansible-playbook nfs-setup-playbook.yml -e "ansible_become_password=<root_password>"
 ```
 /etc/ansible/hosts
 ```
 [nfs-servers]
 xxx.xxx.xxx.xxx     ansible_user=<username>
 ```
-Execute Playbook
-```
-ansible-playbook nfs-playbook.yml -e "ansible_become_password=<root_password>"
-```
+Installing infrastructure components required ro run CTE for Minikube in another VM
 * Install Docker
 * Install Minikube
 * Install PowerShell
+* Install Kubectl
+* Install helm
+* Install cri-docker
+* Install jq (json parser for linux)
 ```
-# Applicable for a target machine with snap based Ubuntu distribution
-- hosts: minikube-servers
-  become: yes
-  tasks:
-  - name: install docker
-    community.general.snap:
-      name:
-        - docker
-
-  - name: install powershell
-    community.general.snap:
-      name: powershell
-      classic: yes
+ansible-playbook cte-infra-setup-playbook.yml -e "ansible_become_password=<root_password>"
 ```
 /etc/ansible/hosts
 ```
 [minikube-servers]
 xxx.xxx.xxx.xxx     ansible_user=<username>
 ```
-Execute Playbook
-```
-ansible-playbook docker-playbook.yml -e "ansible_become_password=<root_password>"
-```
-#### 3) Update config.txt file
+#### 3) Update config file
+filename: ./automation_modules/vars/main.json
+
 Variable Name | Description | Example Value
 --- | --- | ---
-username | Username for Ciphertrust Manager | admin
-password | Password for Ciphertrust Manager | *********
-cmip | FQDN/Host/IP of Ciphertrust Manager | 10.10.10.10
-counter | Unique value to be appended to CM config parameters | demo
-nfsServerIp | IP Address of an NFS server | 10.10.10.10
-#### 4) Deploying Solution
+cm_username | Username for Ciphertrust Manager | admin
+cm_password | Password for Ciphertrust Manager | *********
+cm_host | FQDN/Host/IP of Ciphertrust Manager | 10.10.10.10
+nfs_server_host | IP Address of an NFS server | 10.10.10.10
+cm_kubernetes_policy_name | desired CSI policy name on CM | demo
+cm_kubernetes_policy_key_name | desired key name on CM | demo
+cm_kubernetes_storage_group_name | desired k8s storage group name on CM | demo
+cm_kubernetes_storage_class | desired storage class name on CM | demo
+cm_kubernetes_namespace | kubernetes namespace defined on CM | demo
+#### 4) Putting everything together
 ```
-ansible-playbook cte-deployment.yml  -e "ansible_become_password=<root_password>"
+ansible-playbook cte-config-deployment-playbook.yml  -e "ansible_become_password=<root_password>"
 ```
