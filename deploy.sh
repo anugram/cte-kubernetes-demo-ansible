@@ -15,6 +15,7 @@ scName=`cat ./automation_modules/vars/main.json | jq -r '.cm_kubernetes_storage_
 nsName=`cat ./automation_modules/vars/main.json | jq -r '.cm_kubernetes_namespace'`
 regToken=`cat ./automation_modules/vars/main.json | jq -r '.cm_reg_token'`
 cmIP=`cat ./automation_modules/vars/main.json | jq -r '.cm_host'`
+nfsServerIp=`cat ./automation_modules/vars/main.json | jq -r '.nfs_server_host'`
 
 token=`getToken`
 caId=`getCAID`
@@ -50,7 +51,7 @@ sed -i "s/VAR_NS/$nsName/g" ./example/demo.yaml
 sudo apt-get install -y nfs-common
 sudo systemctl start nfs-utils
 sudo systemctl enable nfs-utils
-mkdir -p /data/cte
+sudo mkdir -p /data/cte
 sudo chmod 777 /data/cte
 sudo systemctl enable nfs-utils
 

@@ -1,0 +1,96 @@
+---
+ - hosts: minikube-servers
+   become: yes
+   roles:
+     - gantsign.minikube
+     - geerlingguy.docker
+
+   tasks:
+      # - name: Update packege lists
+      #   apt:
+      #     update_cache: yes
+      # - name: Download PGP security keys
+      #   get_url:
+      #     url: https://packages.microsoft.com/config/ubuntu/22.10/packages-microsoft-prod.deb
+      #     dest: /tmp/packages-microsoft-prod.deb
+      #     force_basic_auth: yes
+      # - name: Register PGP security keys
+      #   command:
+      #     cmd: dpkg -i /tmp/packages-microsoft-prod.deb
+      # - name: Update packege lists
+      #   apt:
+      #     update_cache: yes
+      # - name: Install latest version of PowerShell 7
+      #   apt:
+      #     name: powershell
+
+      - name: install kubectl
+        snap:
+          name: kubectl
+          classic: yes
+
+      - name: install powershell
+        snap:
+          name: powershell
+          classic: yes
+
+      - name: install JQ
+        snap:
+          name: jq
+
+      - name: Install dos2unix
+        ansible.builtin.apt:
+          name: dos2unix
+
+      - name: Clone a github repository
+        git:
+          repo: https://github.com/anugram/cte-kubernetes-demo-ansible.git
+          dest: /tmp/cte/
+          clone: yes
+          force: yes
+          update: yes
+
+      - name: run Dos2Unix
+        ansible.builtin.shell:
+          "find . -type f -print0 | xargs -0 dos2unix"
+        args:
+          chdir: "/tmp/cte"
+
+      - name: copy config file to remote
+        ansible.builtin.copy:
+          src: main.json
+          dest: /tmp/cte/automation_modules/vars/main.json
+          mode: u+rw,g-wx,o-rwx
+
+      - name: delete existing minikube
+        ansible.builtin.shell:
+          "minikube delete --all"
+
+      - name: start minikube
+        ansible.builtin.shell:
+          "minikube start --driver=docker --force"
+        become: yes
+
+      - name: start kubectl
+        ansible.builtin.shell:
+          "kubectl get ns"
+
+      - name: Clone CTE github repository
+        git:
+          repo: https://github.com/thalescpl-io/ciphertrust-transparent-encryption-kubernetes.git
+          dest: /tmp/cte-k8s/
+          clone: yes
+          force: yes
+          update: yes
+
+      - name: deploye CTE for k8s
+        ansible.builtin.shell:
+          "./deploy.sh"
+        args:
+          chdir: "/tmp/cte-k8s"
+
+      - name: deploye CTE
+        ansible.builtin.shell:
+          "./deploy.sh"
+        args:
+          chdir: "/tmp/cte"

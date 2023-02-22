@@ -7,5 +7,6 @@
   "cm_kubernetes_storage_group_name":"cte-csi-sg",
   "cm_kubernetes_storage_class":"cte-csi-sc",
   "cm_kubernetes_namespace":"cte",
+  "nfs_server_host":"1.1.1.1",
   "cm_reg_token":"QzitubXgkAEoXKFgETpwgKUQZVyaMSBsz53Zq2MwCbwAU9T5ehjdBpe62UYMwdgz"
 }
