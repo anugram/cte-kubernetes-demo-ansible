@@ -2,7 +2,7 @@
 This script leverages Minikube along with teh CipherTrust Transparent Encryption tool for Kubernetes to demonstrate the transparent encryption capabilities offered by the CipherTrust Manager, all using the free-forever community edition of CipherTrust Manager from Thales.
 
 This project will let you
-* Configure Ciphertrust Manager's Container Storage Interface policy based on variables provided as part of PowerShell script execution
+* Configure Ciphertrust Manager's Container Storage Interface policy based on variables provided as part of a bash script execution
 
 ## Getting Started
 
