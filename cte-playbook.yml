@@ -24,6 +24,11 @@
       #   apt:
       #     name: powershell
 
+      - name: add user to docker group
+        ansible.builtin.shell:
+          "usermod -aG docker $USER"
+        become: yes
+
       - name: install kubectl
         snap:
           name: kubectl
@@ -38,9 +43,20 @@
         snap:
           name: jq
 
+      - name: install helm
+        snap:
+          name: helm
+          classic: yes
+
+      - name: Install cri-docker
+        apt:
+          deb: https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.1/cri-dockerd_0.3.1.3-0.ubuntu-jammy_amd64.deb
+
       - name: Install dos2unix
         ansible.builtin.apt:
-          name: dos2unix
+          pkg:
+          - dos2unix
+          - conntrack
 
       - name: Clone a github repository
         git:
@@ -58,7 +74,7 @@
 
       - name: copy config file to remote
         ansible.builtin.copy:
-          src: main.json
+          src: ./automation_modules/vars/main.json
           dest: /tmp/cte/automation_modules/vars/main.json
           mode: u+rw,g-wx,o-rwx
 
@@ -66,10 +82,14 @@
         ansible.builtin.shell:
           "minikube delete --all"
 
+      - name: for docker based Minikube inside VM
+        ansible.builtin.shell:
+          "sysctl fs.protected_regular=0"
+        become: yes
+
       - name: start minikube
         ansible.builtin.shell:
           "minikube start --driver=docker --force"
-        become: yes
 
       - name: start kubectl
         ansible.builtin.shell:

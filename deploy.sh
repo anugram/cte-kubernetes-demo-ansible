@@ -55,11 +55,11 @@ sudo mkdir -p /data/cte
 sudo chmod 777 /data/cte
 sudo systemctl enable nfs-utils
 
-cd /tmp/ciphertrust-transparent-encryption-kubernetes && ./deploy.sh
+#cd /tmp/ciphertrust-transparent-encryption-kubernetes && ./deploy.sh
 
+kubectl apply -f ./example/cmtoken.yaml
 kubectl apply -f ./example/createNamespace.yaml
 kubectl apply -f ./example/createStorageClass.yaml
-kubectl apply -f ./example/cmtoken.yaml
 kubectl apply -f ./example/storage.yaml
 kubectl apply -f ./example/local-pv.yaml
 kubectl apply -f ./example/local-pvc.yaml
