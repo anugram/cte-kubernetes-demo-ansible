@@ -56,11 +56,11 @@ cm_username | Username for Ciphertrust Manager | admin
 cm_password | Password for Ciphertrust Manager | *********
 cm_host | FQDN/Host/IP of Ciphertrust Manager | 10.10.10.10
 nfs_server_host | IP Address of an NFS server | 10.10.10.10
-cm_kubernetes_policy_name | desired CSI policy name on CM | demo
-cm_kubernetes_policy_key_name | desired key name on CM | demo
-cm_kubernetes_storage_group_name | desired k8s storage group name on CM | demo
-cm_kubernetes_storage_class | desired storage class name on CM | demo
-cm_kubernetes_namespace | kubernetes namespace defined on CM | demo
+cm_kubernetes_policy_name | desired CSI policy name on CM | cte-csi-policy
+cm_kubernetes_policy_key_name | desired key name on CM | cte-key
+cm_kubernetes_storage_group_name | desired k8s storage group name on CM | cte-csi-sg
+cm_kubernetes_storage_class | desired storage class name on CM | cte-csi-sc
+cm_kubernetes_namespace | kubernetes namespace defined on CM | cte
 #### 4) Putting everything together
 ```
 ansible-playbook cte-config-deployment-playbook.yml  -e "ansible_become_password=<root_password>"
