@@ -52,6 +52,10 @@
 }
 ```
 
+2. Create a resource set to associate with the Guard Point. For this example this resource set applies to the root directory and all its sub folders.
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/transparent-encryption/resourcesets/
+- Payload
 ```
 {
 	"description": "Created via API",
