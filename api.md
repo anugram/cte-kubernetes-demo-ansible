@@ -1,7 +1,7 @@
 ```
 {
 	"xts": true,
-	"name": "cte-key-001",
+	"name": "cte-key-api-001",
 	"unexportable": false,
 	"meta": {
 		"ownerId": "abc",
@@ -55,6 +55,31 @@
 		"include_subfolders": true,
 		"directory": "/",
 		"file": "*"
+	}]
+}
+```
+
+```
+{
+	"name": "cte-csi-policy-api-001",
+	"never_deny": false,
+	"metadata": {
+		"restrict_update": false
+	},
+	"security_rules": [{
+			"exclude_resource_set": false,
+			"action": "all_ops",
+			"process_set_id": "",
+			"effect": "permit,audit,applykey",
+			"exclude_user_set": false,
+			"exclude_process_set": false,
+			"user_set_id": "",
+			"resource_set_id": "empty-rs-api-01_id"
+		}
+	],
+	"policy_type": "CSI",
+	"key_rules": [{
+		"key_id": "cte-key-api-001"
 	}]
 }
 ```
