@@ -1,7 +1,9 @@
 1. Create Key for CTE-K8s
 
-POST: https://$CM_IP_FQDN/api/v1/vault/keys2/
-Payload -
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/vault/keys2/
+- Payload 
+
 ```
 {
 	"xts": true,
