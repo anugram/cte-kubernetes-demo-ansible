@@ -93,3 +93,21 @@
     "client_profile":  "DefaultClientProfile"
 }
 ```
+
+```
+{
+	"policy_list": [
+		"cte-csi-policy-api-001-id"
+	]
+}
+```
+
+```
+{
+	"max_clients": 5,
+	"ca_id": "ca-id",
+	"name_prefix": "cte-token-api-001",
+	"cert_duration": 730,
+	"lifetime": ""
+}
+```
