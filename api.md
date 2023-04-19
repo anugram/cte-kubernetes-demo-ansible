@@ -45,6 +45,7 @@
 	"size": 256
 }
 ```
+
 ```
 {
 	"description": "Created via API",
