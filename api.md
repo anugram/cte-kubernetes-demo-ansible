@@ -68,7 +68,12 @@
 	}]
 }
 ```
+Save the resource set ID from the response as "empty-rs-api-01-id"
 
+3. Create a CTE CSI Policy to assoiate with the resource set we created above.
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/transparent-encryption/policies/
+- Payload
 ```
 {
 	"name": "cte-csi-policy-api-001",
@@ -84,7 +89,7 @@
 			"exclude_user_set": false,
 			"exclude_process_set": false,
 			"user_set_id": "",
-			"resource_set_id": "empty-rs-api-01_id"
+			"resource_set_id": "empty-rs-api-01-id"
 		}
 	],
 	"policy_type": "CSI",
@@ -93,7 +98,12 @@
 	}]
 }
 ```
+Save the ID from the response as "cte-csi-policy-api-001-id"
 
+4. Now create the Kubernetes Storage Group with the Storage Class.
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/transparent-encryption/csigroups/
+- Payload
 ```
 {
     "description":  "Created via API",
@@ -103,7 +113,12 @@
     "client_profile":  "DefaultClientProfile"
 }
 ```
+Save the ID from the response as "sgId"
 
+5. Finally associate the CSI Policy with the above created Storage Group
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/transparent-encryption/csigroups/$sgId/guardpoints/
+- Payload
 ```
 {
 	"policy_list": [
@@ -112,10 +127,14 @@
 }
 ```
 
+6. Last step, get the Registration Token
+- Method = POST
+- URL = https://$CM_IP_FQDN/api/v1/client-management/regtokens/
+- Payload
 ```
 {
 	"max_clients": 5,
-	"ca_id": "ca-id",
+	"ca_id": "ca-uri",
 	"name_prefix": "cte-token-api-001",
 	"cert_duration": 730,
 	"lifetime": ""
