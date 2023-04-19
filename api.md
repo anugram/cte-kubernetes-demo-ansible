@@ -45,3 +45,15 @@
 	"size": 256
 }
 ```
+```
+{
+	"description": "Created via API",
+	"name": "empty-rs-01",
+	"type": "Directory",
+	"resources": [{
+		"include_subfolders": true,
+		"directory": "/",
+		"file": "*"
+	}]
+}
+```
