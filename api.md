@@ -83,3 +83,13 @@
 	}]
 }
 ```
+
+```
+{
+    "description":  "Created via API",
+    "name":  "cte-csi-sg-api",
+    "k8s_namespace":  "cte-api",
+    "k8s_storage_class":  "cte-csi-sc-api",
+    "client_profile":  "DefaultClientProfile"
+}
+```
